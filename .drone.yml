@@ -7,7 +7,18 @@ steps:
 - name: docker  
   image: plugins/docker
   settings:
-
-    tags: latest
+    username:
+      from_secret: REGISTRY_USER
+    password:
+      from_secret: REGISTRY_PASSWORD
+    secrets:
+      - source: REGISTRY_USER
+        target: username
+      - source: REGISTRY_PASSWORD
+        target: password
+    repo: olymk2/drone
+    tags:
+      - latest
+      - 1.6.0
     build_args:
       - VERSION=1.6.0
